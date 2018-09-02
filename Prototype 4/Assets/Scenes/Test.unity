@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657576, g: 0.49641258, b: 0.5748164, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -903,6 +903,25 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a496a4ebf29c09a4ba5ac30c2cd3d464, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &1350546950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 934adf488f1169e49814d030da8d49c8,
+    type: 3}
+  m_PrefabInternal: {fileID: 707166494}
+--- !u!64 &1350546953
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350546950}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 934adf488f1169e49814d030da8d49c8, type: 3}
 --- !u!1 &1432864342
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +933,7 @@ GameObject:
   - component: {fileID: 1432864343}
   - component: {fileID: 1432864345}
   - component: {fileID: 1432864344}
+  - component: {fileID: 1432864346}
   m_Layer: 0
   m_Name: pCylinder5
   m_TagString: Untagged
@@ -979,6 +999,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432864342}
   m_Mesh: {fileID: 4300000, guid: d463f309b8e89264a88d9bc2c162efb3, type: 3}
+--- !u!64 &1432864346
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432864342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: d463f309b8e89264a88d9bc2c162efb3, type: 3}
 --- !u!1 &1454098231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1063,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 28
+  orthographic size: 27
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
