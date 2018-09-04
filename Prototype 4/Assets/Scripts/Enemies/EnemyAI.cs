@@ -76,6 +76,16 @@ public class EnemyAI : MonoBehaviour {
         }
 	}
 
+    //Collision with bullet
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
     void Steer(Vector3 _Direction, float _Force)
     {
 	    m_vForward += ((Vector3.Normalize(_Direction - m_vForward) * c_fMaxSpeed) - m_vForward) * _Force;

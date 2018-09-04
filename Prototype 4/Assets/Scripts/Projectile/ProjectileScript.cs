@@ -25,6 +25,16 @@ public class ProjectileScript : MonoBehaviour
         }
 	}
 
+    //Collision with Enemey
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Follower")
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
     public void SetDirection(Vector3 _Direction)
     {
         m_vDirection = _Direction;
