@@ -10,22 +10,23 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
-    public GameObject Slider;
+    public Text m_VolumeText;
+    public float m_fVolumeLevel;
+
+    public GameObject slider;
 
     // Use this for initialization
     void Awake()
     {
 
-        Slider = GameObject.Find("Slider");
-
-        DontDestroyOnLoad(gameObject);
+        m_fVolumeLevel = 0.2f;
 
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = Slider.GetComponent<Slider>().value;
+            s.source.volume = slider.GetComponent<Slider>().value;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
@@ -40,18 +41,14 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_VolumeText.text = ((int)(slider.GetComponent<Slider>().value * 100.0f)).ToString();
 
+        AudioListener.volume = slider.GetComponent<Slider>().value;
     }
 
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.Name == name);
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found");
-            return;
-
-        }
         s.source.Play();
 
     }
