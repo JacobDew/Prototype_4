@@ -29,7 +29,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   colored:
     overrideState: 0
     value: 1
@@ -56,14 +56,14 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   spectralLut:
     overrideState: 0
     value: {fileID: 0}
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.182
+    value: 0.049
   fastMode:
     overrideState: 0
     value: 0
@@ -148,8 +148,8 @@ MonoBehaviour:
     overrideState: 1
     value: 16
   mixerRedOutBlueIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -6
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
