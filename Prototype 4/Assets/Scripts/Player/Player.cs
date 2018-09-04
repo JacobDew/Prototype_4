@@ -55,13 +55,9 @@ public class Player : MonoBehaviour
                     if (null != HitPos.point)
                     {
                         Debug.Log("Hit!");
-                        GameObject TempObject = Instantiate(Resources.Load<GameObject>("Cube"), m_Player.transform.position, m_Player.transform.rotation);
-
+                        GameObject TempObject = Instantiate(Resources.Load<GameObject>("Cube"), m_Player.transform.position, transform.rotation);
                         TempObject.GetComponent<ProjectileScript>().SetDirection(Vector3.Normalize(new Vector3(HitPos.point.x - m_Player.transform.position.x,
                             0.0f, HitPos.point.z - m_Player.transform.position.z)));
-
-                        //sound effect for bullet
-                        FindObjectOfType<AudioManager>().Play("Laser");
                     }
                 }
             }
