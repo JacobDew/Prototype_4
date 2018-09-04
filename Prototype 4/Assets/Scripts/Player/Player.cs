@@ -39,21 +39,22 @@ public class Player : MonoBehaviour
 	void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 Temp1 = ray.direction;
-        Vector3 Temp2 = ray.origin;
 
-        Time.timeScale = 0.0f;
+        
         if (Input.GetMouseButton(0))
 		{
 			Debug.Log("Pressed left click.");
             if (0.0f > m_fLastShot)
             {
+                Debug.Log(m_fLastShot);
                 m_fLastShot = m_fFireDelay;
                 RaycastHit HitPos;
                 if (Physics.Raycast(ray, out HitPos))
                 {
-                    if (null != HitPos.rigidbody)
+                    Debug.Log("Raycast");
+                    if (null != HitPos.point)
                     {
+                        Debug.Log("Hit!");
                         GameObject TempObject = Instantiate(Resources.Load<GameObject>("Cube"), m_Player.transform.position, transform.rotation);
                         TempObject.GetComponent<ProjectileScript>().SetDirection(Vector3.Normalize(new Vector3(HitPos.point.x - m_Player.transform.position.x,
                             0.0f, HitPos.point.z - m_Player.transform.position.z)));
