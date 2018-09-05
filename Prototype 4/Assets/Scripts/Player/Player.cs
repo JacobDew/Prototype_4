@@ -1,38 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
 {
     private GameObject m_Player;
 
+    private GameObject m_pCombo;
+    private GameObject m_pHealth;
+    private GameObject m_pMultiplier;
+
     private Vector3 m_vForward;
     private Vector3 m_vPlanePoint;
     private Vector3 m_vPlaneNormal;
 
 
-    private float m_fFireDelay;
+    private float m_fHealth;
+
     private float m_fLastShot;
 
-    private short m_sWeapon;
+    private int m_iWeapon;
+    private float m_fFireDelay;
+    private float m_fDamage;
 
-    //  0: Semi-Auto.
-    //  1: Full-Auto.
-    private short m_sFireType;
+    public int m_iSwapCombo;
+    public float m_fComboTimer;
 
 
 	// Use this for initialization
 	void Start()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_pCombo = GameObject.FindGameObjectWithTag("Combo");
+        m_pHealth = GameObject.FindGameObjectWithTag("Health");
+        m_pMultiplier = GameObject.FindGameObjectWithTag("Multiplier");
         //  Add Plane Point.
         m_vPlaneNormal = new Vector3(0.0f, 1.0f, 0.0f);
         m_vForward = new Vector3(0.0f, 0.0f, 1.0f);
-        m_fFireDelay = 0.2f;
         m_fLastShot = 0.0f;
-        m_sWeapon = 0;
-        m_sFireType = 0;
+        m_fFireDelay = 0.2f;
+        m_iWeapon = 0;
+        m_iSwapCombo = 0;
+        m_fComboTimer = 0.0f;
+        m_fHealth = 100.0f;
+        m_pHealth.GetComponent<Text>().text = m_fHealth.ToString();
     }
 	
 	// Update is called once per frame
@@ -55,19 +68,46 @@ public class Player : MonoBehaviour
                     if (null != HitPos.point)
                     {
                         Debug.Log("Hit!");
-                        GameObject TempObject = Instantiate(Resources.Load<GameObject>("Cube"), m_Player.transform.position, m_Player.transform.rotation);
-                        
+                        GameObject TempObject;
+                        switch (m_iWeapon)
+                        {
+                            case 0:
+                                {
+                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube0"), m_Player.transform.position, m_Player.transform.rotation);
+                                }
+                                break;
+                            case 1:
+                                {
+                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube1"), m_Player.transform.position, m_Player.transform.rotation);
+                                }
+                                break;
+                            case 2:
+                                {
+                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube2"), m_Player.transform.position, m_Player.transform.rotation);
+                                }
+                                break;
+                            case 3:
+                                {
+                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube3"), m_Player.transform.position, m_Player.transform.rotation);
+                                }
+                                break;
+                            default:
+                                {
+                                     TempObject = Instantiate(Resources.Load<GameObject>("Cube0"), m_Player.transform.position, m_Player.transform.rotation);
+                                }
+                                break;
+                        }
 
                         TempObject.GetComponent<ProjectileScript>().SetDirection(Vector3.Normalize(new Vector3(HitPos.point.x - m_Player.transform.position.x,
-                            0.0f, HitPos.point.z - m_Player.transform.position.z)));
+                            0.0f, HitPos.point.z - m_Player.transform.position.z)), (m_fDamage * ((float)m_iSwapCombo % 10.0f) + 1.0f));
 
                         //sound effect for bullet
-                        FindObjectOfType<AudioManager>().Play("Laser");
+                        //FindObjectOfType<AudioManager>().Play("Laser");
                     }
                 }
             }
         }
-
+        
 		if (Input.GetMouseButton(1)) {
 			Debug.Log("Pressed right click.");
 		}
@@ -76,6 +116,67 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("Pressed middle click.");
 		}
+
         m_fLastShot -= Time.deltaTime;
+        m_fComboTimer -= Time.deltaTime;
+        if (0.0f > m_fComboTimer)
+        {
+            m_iSwapCombo = 0;
+            m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
+            m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + +1.0f).ToString();
+        }
+        
+    }
+    
+    public void SetWeapon(int _Weapon)
+    {
+        m_iWeapon = _Weapon;
+        m_fComboTimer = 10.0f;
+        m_iSwapCombo += 1;
+        switch (_Weapon)
+        {
+            case 0:
+                {
+                    m_fFireDelay = 0.2f;
+                    m_fDamage = 0.6f;
+                }
+                break;
+            case 1:
+                {
+                    m_fFireDelay = 1.0f;
+                    m_fDamage = 5.0f;
+                }
+                break;
+            case 2:
+                {
+                    m_fFireDelay = 0.1f;
+                    m_fDamage = 0.4f;
+                }
+                break;
+            case 3:
+                {
+                    m_fFireDelay = 0.05f;
+                    m_fDamage = 0.15f;
+                }
+                break;
+            default:
+                {
+                    m_fFireDelay = 0.5f;
+                    m_fDamage = 0.15f;
+                }
+                break;
+        }
+        m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
+        m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + +1.0f).ToString();
+    }
+
+    public void TakeDamage(float _Damage)
+    {
+        m_fHealth -= _Damage;
+        if (100.0f < m_fHealth)
+        {
+            m_fHealth = 100.0f;
+        }
+        m_pHealth.GetComponent<Text>().text = m_fHealth.ToString();
     }
 }

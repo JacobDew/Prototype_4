@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Follower
   - Bullet
+  - Health
+  - Combo
+  - Multiplier
+  - Projectile
   layers:
   - Default
   - TransparentFX
