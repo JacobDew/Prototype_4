@@ -55,7 +55,9 @@ public class Player : MonoBehaviour
         m_iSwapCombo = 0;
         m_fComboTimer = 0.0f;
         m_fHealth = 100.0f;
-        m_pHealth.GetComponent<Text>().text = m_fHealth.ToString();
+        m_pHealth.GetComponent<Text>().text = "Health: " + m_fHealth.ToString();
+        m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
+        m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + 1.0f).ToString();
     }
 	
 	// Update is called once per frame
@@ -131,8 +133,7 @@ public class Player : MonoBehaviour
         m_fLastShot -= Time.deltaTime;
         m_fComboTimer -= Time.deltaTime;
         
-        m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
-        m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + 1.0f).ToString();
+        
     }
     
     public void SetWeapon(int _Weapon)
@@ -184,6 +185,6 @@ public class Player : MonoBehaviour
         {
             m_fHealth = 100.0f;
         }
-        m_pHealth.GetComponent<Text>().text = m_fHealth.ToString();
+        m_pHealth.GetComponent<Text>().text = "Health: " + m_fHealth.ToString();
     }
 }

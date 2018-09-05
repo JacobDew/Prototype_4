@@ -20,6 +20,9 @@ public class EnemyAI : MonoBehaviour {
     private const float c_fMaxSpeed = 4.5f;
     private const float c_fForce = 0.15f;
 
+    private float m_fDamage;
+    private float m_fDamageDelay;
+
 
     // Use this for initialization
     void Start()
@@ -30,11 +33,21 @@ public class EnemyAI : MonoBehaviour {
         m_vForward = new Vector3(1.0f, 0.0f, 0.0f);
         m_Player = GameObject.FindGameObjectsWithTag("Player")[0];
         m_rRandom = new System.Random();
+        m_fDamage = 5.0f;
+        m_fDamageDelay = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (0.0f > m_fDamageDelay)
+        {
+            if (1.5f > Vector3.Distance(this.transform.position, m_Player.transform.position))
+            {
+                m_Player.GetComponent<Player>().TakeDamage(m_fDamage);
+                m_fDamageDelay = 1.0f;
+            }
+        }
         m_vTarget = m_Player.transform.position - this.transform.position;
         m_fDistance = Vector3.Magnitude(m_vTarget);
         if (20.0f > m_fDistance)
@@ -64,9 +77,9 @@ public class EnemyAI : MonoBehaviour {
          
                 m_Followers = GameObject.FindGameObjectsWithTag("Follower");
                 m_bArraySet = true;
-       
-        
-	}
+        m_fDamageDelay -= Time.deltaTime;
+
+    }
 
     //Collision with bullet
     void OnTriggerEnter(Collider other)
