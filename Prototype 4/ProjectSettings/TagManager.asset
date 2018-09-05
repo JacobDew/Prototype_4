@@ -10,6 +10,7 @@ TagManager:
   - Combo
   - Multiplier
   - Projectile
+  - Tower
   layers:
   - Default
   - TransparentFX
