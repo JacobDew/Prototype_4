@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
                             0.0f, HitPos.point.z - m_Player.transform.position.z)), (m_fDamage * ((float)m_iSwapCombo % 10.0f) + 1.0f));
 
                         //sound effect for bullet
-                        //FindObjectOfType<AudioManager>().Play("Laser");
+                        FindObjectOfType<AudioManager>().Play("Laser");
                     }
                 }
             }

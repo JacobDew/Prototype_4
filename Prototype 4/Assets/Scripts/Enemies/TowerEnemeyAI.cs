@@ -7,6 +7,7 @@ public class TowerEnemeyAI : MonoBehaviour {
     private GameObject m_Target;
     private GameObject[] m_Followers;
     private GameObject m_Player;
+    private GameObject m_pTower;
 
     private float m_fDistance;
     private Vector3 m_vTarget;
@@ -36,6 +37,7 @@ public class TowerEnemeyAI : MonoBehaviour {
         m_rRandom = new System.Random();
         m_fDamage = 7.0f;
         m_fDamageDelay = 0.0f;
+        m_pTower = GameObject.FindGameObjectWithTag("Tower");
     }
 
     // Update is called once per frame
@@ -43,7 +45,12 @@ public class TowerEnemeyAI : MonoBehaviour {
     {
         if (0.0f > m_fDamageDelay)
         {
-            if (1.5f > Vector3.Distance(this.transform.position, m_Player.transform.position))
+            if (1.5f > Vector3.Distance(this.transform.position, m_pTower.transform.position))
+            {
+                m_pTower.GetComponent<TowerHealth>().TakeDamage(m_fDamage / 4.0f);
+                m_fDamageDelay = 1.0f;
+            }
+            else if (1.5f > Vector3.Distance(this.transform.position, m_Player.transform.position))
             {
                 m_Player.GetComponent<Player>().TakeDamage(m_fDamage);
                 m_fDamageDelay = 1.0f;
@@ -54,12 +61,6 @@ public class TowerEnemeyAI : MonoBehaviour {
         if (20.0f > m_fDistance)
         {
             m_fSpeed = c_fMaxSpeed;
-
-            if (0.5f > m_fDistance)
-            {
-                //Change to Tower health
-               // m_Target.GetComponent<Player>().TakeDamage(5.0f);
-            }
         }
         else
         {

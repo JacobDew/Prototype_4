@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour {
 
         }
 
-        WaveDisplay.text = ("Wave: " + NextWave.ToString());
+        WaveDisplay.text = ("Wave: " + (NextWave + 1).ToString());
     }
 
     void WaveCompleted()
