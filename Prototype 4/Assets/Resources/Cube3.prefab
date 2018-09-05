@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33621509774422934}
   - component: {fileID: 23651114694749160}
   - component: {fileID: 114753548560930122}
+  - component: {fileID: 65128812169126962}
   m_Layer: 0
   m_Name: Cube3
   m_TagString: Bullet
@@ -84,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620004290122526}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65128812169126962
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620004290122526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114753548560930122
 MonoBehaviour:
   m_ObjectHideFlags: 1

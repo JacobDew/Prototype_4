@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour {
 
     private float m_fSpeed;
 
-    private const float c_fMaxSpeed = 5.0f;
+    private const float c_fMaxSpeed = 4.5f;
     private const float c_fForce = 0.15f;
 
 
@@ -53,32 +53,19 @@ public class EnemyAI : MonoBehaviour {
         m_vForward += ((Vector3.Normalize(m_vTarget - m_vForward) * c_fMaxSpeed) - m_vForward) * c_fForce;
         Vector3 Temp = ((m_vForward * m_fSpeed) * Time.deltaTime);
         this.transform.Translate(Temp.x, 0.0f, Temp.z);
+
+        Quaternion targetRotation = Quaternion.LookRotation(m_Player.transform.position - transform.position);
+
+        //transform.rotation = targetRotation;
         m_vTarget -= Temp;
 
 
-        if (false == m_bArraySet)
-        {
             m_fDelay += Time.deltaTime;
-            if (1.0f < m_fDelay && false == m_bArraySet)
-            {
+         
                 m_Followers = GameObject.FindGameObjectsWithTag("Follower");
                 m_bArraySet = true;
-            }
-        }
-        else
-        {
-            for (short sX = 0; sX < m_Followers.Length; sX++)
-            {
-                if (this != m_Followers[sX])
-                {
-                    Vector3 TempVec = this.transform.position - m_Followers[sX].transform.position;
-                    if (3.0f > Vector3.Magnitude(TempVec))
-                    {
-                        Steer(TempVec, c_fForce);
-                    }
-                }
-            }
-        }
+       
+        
 	}
 
     //Collision with bullet
