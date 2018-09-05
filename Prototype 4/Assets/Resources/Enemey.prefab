@@ -22,10 +22,11 @@ GameObject:
   - component: {fileID: 33311705755553452}
   - component: {fileID: 23288755032240822}
   - component: {fileID: 65224178373009790}
-  - component: {fileID: 114478607959042038}
   - component: {fileID: 54724560227868328}
+  - component: {fileID: 65785379596811026}
+  - component: {fileID: 114809195102389894}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemey
   m_TagString: Follower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +86,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336061990996940}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 70b21e77f99790c4a9a0bff9b5a2863b, type: 3}
 --- !u!54 &54724560227868328
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -113,7 +114,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114478607959042038
+--- !u!65 &65785379596811026
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1336061990996940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114809195102389894
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

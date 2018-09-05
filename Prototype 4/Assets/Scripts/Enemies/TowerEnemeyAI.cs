@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour {
+public class TowerEnemeyAI : MonoBehaviour {
 
-	
-    private GameObject m_Player;
+    private GameObject m_Target;
     private GameObject[] m_Followers;
 
     private float m_fDistance;
@@ -28,14 +27,14 @@ public class EnemyAI : MonoBehaviour {
         m_bArraySet = false;
         m_fDelay = 0.0f;
         m_vForward = new Vector3(1.0f, 0.0f, 0.0f);
-        m_Player = GameObject.FindGameObjectsWithTag("Player")[0];
+        m_Target = GameObject.FindGameObjectWithTag("Tower");
         m_rRandom = new System.Random();
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_vTarget = m_Player.transform.position - this.transform.position;
+        m_vTarget = m_Target.transform.position - this.transform.position;
         m_fDistance = Vector3.Magnitude(m_vTarget);
         if (20.0f > m_fDistance)
         {
@@ -43,7 +42,8 @@ public class EnemyAI : MonoBehaviour {
 
             if (0.5f > m_fDistance)
             {
-                m_Player.GetComponent<Player>().TakeDamage(5.0f);
+                //Change to Tower health
+               // m_Target.GetComponent<Player>().TakeDamage(5.0f);
             }
         }
         else
@@ -54,24 +54,24 @@ public class EnemyAI : MonoBehaviour {
         Vector3 Temp = ((m_vForward * m_fSpeed) * Time.deltaTime);
         this.transform.Translate(Temp.x, 0.0f, Temp.z);
 
-        Quaternion targetRotation = Quaternion.LookRotation(m_Player.transform.position - transform.position);
+        Quaternion targetRotation = Quaternion.LookRotation(m_Target.transform.position - transform.position);
 
         //transform.rotation = targetRotation;
         m_vTarget -= Temp;
 
 
-            m_fDelay += Time.deltaTime;
-         
-                m_Followers = GameObject.FindGameObjectsWithTag("Follower");
-                m_bArraySet = true;
-       
-        
-	}
+        m_fDelay += Time.deltaTime;
+
+        m_Followers = GameObject.FindGameObjectsWithTag("Follower");
+        m_bArraySet = true;
+
+
+    }
 
     //Collision with bullet
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Bullet")
+        if (other.tag == "Bullet")
         {
             Destroy(gameObject);
         }
@@ -80,6 +80,6 @@ public class EnemyAI : MonoBehaviour {
 
     void Steer(Vector3 _Direction, float _Force)
     {
-	    m_vForward += ((Vector3.Normalize(_Direction - m_vForward) * c_fMaxSpeed) - m_vForward) * _Force;
+        m_vForward += ((Vector3.Normalize(_Direction - m_vForward) * c_fMaxSpeed) - m_vForward) * _Force;
     }
 }
