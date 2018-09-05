@@ -40,6 +40,11 @@ public class EnemyAI : MonoBehaviour {
         if (20.0f > m_fDistance)
         {
             m_fSpeed = c_fMaxSpeed;
+
+            if (0.5f > m_fDistance)
+            {
+                m_Player.GetComponent<Player>().TakeDamage(5.0f);
+            }
         }
         else
         {
