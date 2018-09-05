@@ -24,8 +24,9 @@ public class ControlMain : MonoBehaviour
     {
         if (5.0f < m_fTimer)
         {
-            GameObject Temp = Instantiate(m_pWeaponObject, new Vector3(Random.Range(-10.0f, 10.0f), 1.0f, Random.Range(-10.0f, 10.0f)), 
-                Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f));
+            GameObject Temp = Instantiate(m_pWeaponObject);
+            Temp.transform.position = new Vector3(Random.Range(-10.0f, 10.0f), 1.0f, Random.Range(-10.0f, 10.0f));
+            Temp.transform.rotation = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
             Temp.GetComponent<Weapon0>().Initialize(Random.Range(0, 3));
             m_fTimer = 0.0f;
         }

@@ -12,6 +12,12 @@ public class Player : MonoBehaviour
     private GameObject m_pHealth;
     private GameObject m_pMultiplier;
 
+    private GameObject m_pCube0;
+    private GameObject m_pCube1;
+    private GameObject m_pCube2;
+    private GameObject m_pCube3;
+
+
     private Vector3 m_vForward;
     private Vector3 m_vPlanePoint;
     private Vector3 m_vPlaneNormal;
@@ -25,8 +31,8 @@ public class Player : MonoBehaviour
     private float m_fFireDelay;
     private float m_fDamage;
 
-    public int m_iSwapCombo;
-    public float m_fComboTimer;
+    private int m_iSwapCombo;
+    private float m_fComboTimer;
 
 
 	// Use this for initialization
@@ -36,6 +42,10 @@ public class Player : MonoBehaviour
         m_pCombo = GameObject.FindGameObjectWithTag("Combo");
         m_pHealth = GameObject.FindGameObjectWithTag("Health");
         m_pMultiplier = GameObject.FindGameObjectWithTag("Multiplier");
+        m_pCube0 = Resources.Load<GameObject>("Cube0");
+        m_pCube1 = Resources.Load<GameObject>("Cube0");
+        m_pCube2 = Resources.Load<GameObject>("Cube0");
+        m_pCube3 = Resources.Load<GameObject>("Cube0");
         //  Add Plane Point.
         m_vPlaneNormal = new Vector3(0.0f, 1.0f, 0.0f);
         m_vForward = new Vector3(0.0f, 0.0f, 1.0f);
@@ -73,31 +83,32 @@ public class Player : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube0"), m_Player.transform.position, m_Player.transform.rotation);
+                                    TempObject = Instantiate(m_pCube0);
                                 }
                                 break;
                             case 1:
                                 {
-                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube1"), m_Player.transform.position, m_Player.transform.rotation);
+                                    TempObject = Instantiate(m_pCube1);
                                 }
                                 break;
                             case 2:
                                 {
-                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube2"), m_Player.transform.position, m_Player.transform.rotation);
+                                    TempObject = Instantiate(m_pCube2);
                                 }
                                 break;
                             case 3:
                                 {
-                                    TempObject = Instantiate(Resources.Load<GameObject>("Cube3"), m_Player.transform.position, m_Player.transform.rotation);
+                                    TempObject = Instantiate(m_pCube3);
                                 }
                                 break;
                             default:
                                 {
-                                     TempObject = Instantiate(Resources.Load<GameObject>("Cube0"), m_Player.transform.position, m_Player.transform.rotation);
+                                     TempObject = Instantiate(m_pCube0);
                                 }
                                 break;
                         }
-
+                        TempObject.transform.position = m_Player.transform.position;
+                        TempObject.transform.rotation = m_Player.transform.rotation;
                         TempObject.GetComponent<ProjectileScript>().SetDirection(Vector3.Normalize(new Vector3(HitPos.point.x - m_Player.transform.position.x,
                             0.0f, HitPos.point.z - m_Player.transform.position.z)), (m_fDamage * ((float)m_iSwapCombo % 10.0f) + 1.0f));
 
@@ -119,13 +130,9 @@ public class Player : MonoBehaviour
 
         m_fLastShot -= Time.deltaTime;
         m_fComboTimer -= Time.deltaTime;
-        if (0.0f > m_fComboTimer)
-        {
-            m_iSwapCombo = 0;
-            m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
-            m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + +1.0f).ToString();
-        }
         
+        m_pCombo.GetComponent<Text>().text = "Combo: " + m_iSwapCombo.ToString();
+        m_pMultiplier.GetComponent<Text>().text = " Multiplier: " + (((float)m_iSwapCombo / 10.0f) + 1.0f).ToString();
     }
     
     public void SetWeapon(int _Weapon)

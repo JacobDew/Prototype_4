@@ -30,36 +30,6 @@ public class ProjectileScript : MonoBehaviour
         m_vDirection = _Direction;
         Speed = _Speed;
         m_fDamage = _Damage;
-
-        //  Load models for projectiles.
-        switch(_Type)
-        {
-            case 0:
-                {
-                    
-                }
-                break;
-            case 1:
-                {
-
-                }
-                break;
-            case 2:
-                {
-
-                }
-                break;
-            case 3:
-                {
-
-                }
-                break;
-            default:
-                {
-
-                }
-                break;
-        }
     }
 
     //  When projectile goes offscreen it deletes itself.
