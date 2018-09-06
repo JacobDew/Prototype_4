@@ -44,9 +44,9 @@ public class Player : MonoBehaviour
         m_pHealth = GameObject.FindGameObjectWithTag("Health");
         m_pMultiplier = GameObject.FindGameObjectWithTag("Multiplier");
         m_pCube0 = Resources.Load<GameObject>("Cube0");
-        m_pCube1 = Resources.Load<GameObject>("Cube0");
-        m_pCube2 = Resources.Load<GameObject>("Cube0");
-        m_pCube3 = Resources.Load<GameObject>("Cube0");
+        m_pCube1 = Resources.Load<GameObject>("Cube1");
+        m_pCube2 = Resources.Load<GameObject>("Cube2");
+        m_pCube3 = Resources.Load<GameObject>("Cube3");
         //  Add Plane Point.
         m_vPlaneNormal = new Vector3(0.0f, 1.0f, 0.0f);
         m_vForward = new Vector3(0.0f, 0.0f, 1.0f);
@@ -133,7 +133,11 @@ public class Player : MonoBehaviour
 
         m_fLastShot -= Time.deltaTime;
         m_fComboTimer -= Time.deltaTime;
-        
+        if (0.0f > m_fComboTimer)
+        {
+            m_iSwapCombo = -1;
+            SetWeapon(m_iWeapon);
+        }
         
     }
     
