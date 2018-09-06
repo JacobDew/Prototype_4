@@ -37,4 +37,9 @@ public class ProjectileScript : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public float GetDamage()
+    {
+        return m_fDamage;
+    }
 }

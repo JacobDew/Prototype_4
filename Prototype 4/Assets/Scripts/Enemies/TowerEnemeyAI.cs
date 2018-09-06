@@ -25,6 +25,8 @@ public class TowerEnemeyAI : MonoBehaviour {
     private float m_fDamage;
     private float m_fDamageDelay;
 
+    private float m_fHealth;
+
     // Use this for initialization
     void Start()
     {
@@ -38,6 +40,7 @@ public class TowerEnemeyAI : MonoBehaviour {
         m_fDamage = 7.0f;
         m_fDamageDelay = 0.0f;
         m_pTower = GameObject.FindGameObjectWithTag("Tower");
+        m_fHealth = 3.5f;
     }
 
     // Update is called once per frame
@@ -89,20 +92,23 @@ public class TowerEnemeyAI : MonoBehaviour {
     {
         if (other.tag == "Bullet")
         {
-            GameObject Temp = Resources.Load<GameObject>("X");
-            Vector3 vTemp = this.transform.position;
-            short sX = 0;
-            while (6 > sX)
-            {
-                GameObject Temp2 = Instantiate(Temp);
-                Temp2.transform.position = this.transform.position + new Vector3(Random.Range(-0.3f, 0.3f), -1.0f, Random.Range(-0.3f, 0.3f));
-                Temp2.transform.Rotate(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)));
-                sX++;
-            }
+            m_fHealth -= other.gameObject.GetComponent<ProjectileScript>().GetDamage();
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            if (0.0f > m_fHealth)
+            {
+                GameObject Temp = Resources.Load<GameObject>("X");
+                Vector3 vTemp = this.transform.position;
+                short sX = 0;
+                while (6 > sX)
+                {
+                    GameObject Temp2 = Instantiate(Temp);
+                    Temp2.transform.position = this.transform.position + new Vector3(Random.Range(-0.3f, 0.3f), -1.0f, Random.Range(-0.3f, 0.3f));
+                    Temp2.transform.Rotate(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)));
+                    sX++;
+                }
+                Destroy(gameObject);
+            }
         }
-
     }
 
     void Steer(Vector3 _Direction, float _Force)
