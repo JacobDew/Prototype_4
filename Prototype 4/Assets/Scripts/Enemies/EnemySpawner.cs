@@ -33,8 +33,11 @@ public class EnemySpawner : MonoBehaviour {
 
     public SpawnState State = SpawnState.COUNTING;
 
+    
+
     void Start ()
     {
+        WaveCountdown -= 0.3f;
         if (SpawnPoints.Length == 0)
         {
             Debug.Log("ERROR: No Spawnpoints refenced");
@@ -97,6 +100,7 @@ public class EnemySpawner : MonoBehaviour {
         else
         {
             NextWave++;
+
         }
   
     }
@@ -127,7 +131,7 @@ public class EnemySpawner : MonoBehaviour {
         for (int i = 0; i < _wave.EnemyCount; i++)
         {
             //30% of spawning Tower Enemey
-            if(Random.Range(0,10) == 3)
+            if(Random.Range(0,10) >= 4)
             {
                 SpawnEnemy(_wave.TowerEnemy);
             }

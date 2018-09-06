@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TowerHealth : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class TowerHealth : MonoBehaviour
         m_fTowerHealth -= _Damage;
         if (0.0f > m_fTowerHealth)
         {
-            //  End condition;
+            SceneManager.LoadScene("GameOver");
         }
         m_pHealthDisplay.GetComponent<Text>().text = "Tower Health: " + m_fTowerHealth.ToString();
     }

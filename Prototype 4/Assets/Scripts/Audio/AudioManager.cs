@@ -45,12 +45,21 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+      
+
         Sound s = Array.Find(sounds, sound => sound.Name == name);
+
+        if (name == "Laser")
+        {
+            s.source.pitch = UnityEngine.Random.Range(0.4f, 1f);
+            s.source.volume = 0.7f;
+
+        }
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found");
             return;
-
+            
         }
         s.source.Play();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -184,6 +185,10 @@ public class Player : MonoBehaviour
         if (100.0f < m_fHealth)
         {
             m_fHealth = 100.0f;
+        }
+        if (0.01f > m_fHealth)
+        {
+            SceneManager.LoadScene("GameOver");
         }
         m_pHealth.GetComponent<Text>().text = "Health: " + m_fHealth.ToString();
     }
